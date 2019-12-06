@@ -3,7 +3,7 @@ package main
 import java.io.File
 
 fun main() {
-    val input : String  = File("src\\resources\\day1.txt").readLines().reduce{a, b -> "$a,$b" }
+    val input : String = File("src\\resources\\day1.txt").readLines().reduce{a, b -> "$a,$b" }
     val masses = input.split(',').map { it.toInt() }
     val day1 = Day1()
     val part1 = day1.fuelRequired(masses)
