@@ -6,7 +6,6 @@ import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 class IntcodeComputer (
-    //Must be mutable so we can use more than whats initialized
     commands: List<Long>,
     val input: Channel<Long> = Channel(Channel.UNLIMITED),
     val output: Channel<Long> = Channel(Channel.CONFLATED)
