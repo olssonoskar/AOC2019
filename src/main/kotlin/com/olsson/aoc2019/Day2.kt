@@ -1,9 +1,9 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 
 fun main() {
-    val input : String = File("src\\resources\\day2.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = Utils.getFromResources("day2.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputs = input.split(',').map { it.toInt() }
     val day2 = Day2(inputs, 19_690_720)
     val result = day2.part1()

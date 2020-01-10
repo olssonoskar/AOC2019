@@ -1,17 +1,17 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 import kotlin.math.abs
 
 fun main() {
-    val input = File("src\\resources\\day12.txt")
+    val input = Utils.getFromResources("day12.txt")
         .readLines().reduce{ a, b -> "$a,$b" }
         .replace(Regex("[<>xyz=]+"), "")
         .split(",")
         .map { it.trim() }
         .map { it.toInt() }
     val day12 = Day12(input)
-    //day12.runSimulation(1000) Part 1
+    day12.runSimulation(1000)
 
 }
 

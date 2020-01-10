@@ -1,4 +1,4 @@
-package main
+package com.olsson.aoc2019
 
 import kotlinx.coroutines.channels.Channel
 import java.lang.IndexOutOfBoundsException

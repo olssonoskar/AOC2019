@@ -1,11 +1,11 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 fun main() {
-    val input : String = File("src\\resources\\day5.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = Utils.getFromResources("day5.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputInt = input.split(',').map { it.toInt() }
     val day5 = Day5(inputInt)
     day5.execute()

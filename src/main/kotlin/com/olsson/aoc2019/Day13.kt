@@ -1,5 +1,6 @@
-package main
+package com.olsson.aoc2019
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -7,15 +8,16 @@ import kotlinx.coroutines.runBlocking
 import java.io.File
 import kotlin.math.sign
 
+@ExperimentalCoroutinesApi
 fun main() {
-
-    val input : String = File("src\\resources\\day13.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = Utils.getFromResources("day13.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputLong = input.split(',').map { it.toLong() }
     val day13 = Day13()
     println(day13.part1(inputLong))
     println(day13.part2(inputLong))
 }
 
+@ExperimentalCoroutinesApi
 class Day13 {
 
     fun part1(input: List<Long>) = runBlocking {

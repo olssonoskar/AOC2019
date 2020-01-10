@@ -1,11 +1,11 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 import java.lang.UnsupportedOperationException
 import kotlin.math.abs
 
 fun main() {
-    val input : List<String> = File("src\\resources\\day3.txt").readLines().toCollection(arrayListOf())
+    val input : List<String> = Utils.getFromResources("day3.txt").readLines().toCollection(arrayListOf())
     val day3 = Day3()
     val intersection = day3.part1(input)
     println("Closest intersection is $intersection = ${abs(intersection.first) + abs(intersection.second)}")
@@ -35,7 +35,7 @@ class Day3 {
 
     private fun findPoints(wire: List<String>): Set<Point> {
         val points = mutableSetOf<Point>()
-        var currentPosition = Point(0,Pair(0,0))
+        var currentPosition = Point(0, Pair(0, 0))
         for (path in wire) {
             val newPoint = followWire(path, currentPosition)
             points.addAll(currentPosition.allPointsBetween(newPoint))

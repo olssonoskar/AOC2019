@@ -1,27 +1,30 @@
-package main
+package com.olsson.aoc2019
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.File
 
 @ExperimentalCoroutinesApi
 fun main() {
-    val input : String = File("src\\resources\\day11.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = Utils.getFromResources("day11.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputLong = input.split(',').map { it.toLong() }
     println(Day11(inputLong).paintShip().size)
     printMap(Day11(inputLong).paintShip(1))
 }
 
-fun printMap(map: MutableMap<Pair<Int, Int>, Int>) {
-    val endX = map.maxBy { it.key.first }?.key?.first
-    val startX = map.minBy { it.key.first }?.key?.first
-    val endY = map.maxBy { it.key.second }?.key?.second
-    val startY = map.minBy { it.key.second }?.key?.second
+fun printMap(hull: MutableMap<Pair<Int, Int>, Int>) {
+    val endX = hull.maxBy { it.key.first }?.key?.first
+    val startX = hull.minBy { it.key.first }?.key?.first
+    val endY = hull.maxBy { it.key.second }?.key?.second
+    val startY = hull.minBy { it.key.second }?.key?.second
     if(endX == null || endY == null || startX == null || startY == null) {
-        throw IllegalArgumentException("Not a valid map")
+        throw IllegalArgumentException("Not a valid map of the hull")
     }
     for (x in startX..endX) {
         for (y in startY..endY) {
-            if (map[Pair(x, y)] == 1) {
+            if (hull[Pair(x, y)] == 1) {
                 print("#")
             } else {
                 print(" ")
@@ -35,6 +38,7 @@ class Day11 (
     val input : List<Long>
 ){
 
+    @ExperimentalCoroutinesApi
     fun paintShip(startColor: Int = 0) = runBlocking {
         val hull = mutableMapOf<Pair<Int, Int>, Int>()
         hull[Pair(0,0)] = startColor
@@ -83,7 +87,6 @@ class Day11 (
                 2 -> pos = Pair(pos.first, pos.second - 1)
                 3 -> pos = Pair(pos.first - 1, pos.second)
             }
-
         }
     }
 

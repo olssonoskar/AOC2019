@@ -1,6 +1,5 @@
-package main
+package com.olsson.aoc2019
 
-import java.util.function.BiFunction
 import kotlin.math.pow
 
 fun main() {

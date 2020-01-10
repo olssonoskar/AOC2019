@@ -1,9 +1,9 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 
 fun main() {
-    val input : List<Pair<String, String>> = File("src\\resources\\day6.txt").readLines()
+    val input : List<Pair<String, String>> = Utils.getFromResources("day6.txt").readLines()
         .map {orbit ->
             val planets = orbit.split(")")
             Pair(planets[0], planets[1])

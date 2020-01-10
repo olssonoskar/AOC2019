@@ -1,9 +1,9 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 
 fun main() {
-    val input : String = File("src\\resources\\day1.txt").readLines().reduce{a, b -> "$a,$b" }
+    val input : String = Utils.getFromResources("day1.txt").readLines().reduce{a, b -> "$a,$b" }
     val masses = input.split(',').map { it.toInt() }
     val day1 = Day1()
     val part1 = day1.fuelRequired(masses)

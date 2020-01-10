@@ -1,4 +1,4 @@
-package main
+package com.olsson.aoc2019
 
 import java.io.File
 import java.lang.IndexOutOfBoundsException
@@ -6,7 +6,7 @@ import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 fun main() {
-    val input : String = File("src\\resources\\day9.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = Utils.getFromResources("day9.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputLong = input.split(',').map { it.toLong() }
     val day9 = Day9(inputLong)
     day9.execute()
