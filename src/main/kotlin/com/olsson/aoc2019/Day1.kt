@@ -1,14 +1,11 @@
 package com.olsson.aoc2019
 
-import java.io.File
-
 fun main() {
-    val input : String = Utils.getFromResources("day1.txt").readLines().reduce{a, b -> "$a,$b" }
-    val masses = input.split(',').map { it.toInt() }
+    val input = Utils.getAsIntList("day1.txt")
     val day1 = Day1()
-    val part1 = day1.fuelRequired(masses)
+    val part1 = day1.fuelRequired(input)
     println("Part1 : Total fuel required: $part1")
-    val part2 = day1.fuelRequiredAll(masses)
+    val part2 = day1.fuelRequiredAll(input)
     println("Part2 : Total fuel required including fuel: $part2")
 }
 

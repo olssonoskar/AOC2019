@@ -3,25 +3,28 @@ package com.olsson.aoc2019
 import java.io.File
 
 fun main() {
-    val input : List<Pair<String, String>> = Utils.getFromResources("day6.txt").readLines()
-        .map {orbit ->
-            val planets = orbit.split(")")
-            Pair(planets[0], planets[1])
-        }
-        .toCollection(mutableListOf())
-    val day6 = Day6()
-    day6.buildMap(input)
+    val input = Utils.getAsStringList("day6.txt")
+    val day6 = Day6(input)
     println(day6.calcOrbits())
     println(day6.calcOrbitalTransfer())
 }
 
-class Day6 {
-
+class Day6 (
+        input : List<String>
+){
     private val com = "COM"
     private val root = Planet(com, "", mutableListOf())
     private val existingPlanets = mutableSetOf(com)
 
-    fun buildMap(orbits: List<Pair<String, String>>) {
+    init {
+        val orbits = input.map {orbit ->
+            val planets = orbit.split(")")
+            Pair(planets[0], planets[1])
+        }.toCollection(mutableListOf())
+        buildMap(orbits)
+    }
+
+    private fun buildMap(orbits: List<Pair<String, String>>) {
         var index = 0
         while (existingPlanets.size - 1 < orbits.size) {
             val candidate = orbits[index]
@@ -70,14 +73,14 @@ class Day6 {
         return result
     }
 
-    fun calcOrbitalTransfer(): String {
+    fun calcOrbitalTransfer(): Int {
         val path1 = findPlanetPath("YOU", root)?.split(",")
         val path2 = findPlanetPath("SAN", root)?.split(",")
         if (path1 != null && path2 != null) {
             val change = indexOfChange(path1, path2)
-            return (path1.size + path2.size - (change * 2)).toString()
+            return (path1.size + path2.size - (change * 2))
         }
-        return "not found"
+        return -1
     }
 
     private fun findPlanetPath(searched: String, parent: Planet): String? {

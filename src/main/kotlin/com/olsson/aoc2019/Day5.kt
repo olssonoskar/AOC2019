@@ -5,14 +5,16 @@ import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 fun main() {
-    val input : String = Utils.getFromResources("day5.txt").readLines().reduce{ a, b -> "$a,$b" }
-    val inputInt = input.split(',').map { it.toInt() }
-    val day5 = Day5(inputInt)
+    val input = Utils.getAsIntList("day5.txt")
+    var day5 = Day5(input)
+    day5.execute()
+    day5 = Day5(input, 5)
     day5.execute()
 }
 
 class Day5 (
-    private val commands: List<Int>
+    private val commands: List<Int>,
+    private val mockValue: Int = 1
 ){
     var currentRun = mutableListOf<Int>()
 
@@ -38,8 +40,7 @@ class Day5 (
                 return index + 4
             }
             3 -> {
-                println("Reading input from user, currently mocked to take 1")
-                currentRun[currentRun[index + 1]] = 5 //Should take user input, mock behavior atm
+                currentRun[currentRun[index + 1]] = mockValue //Should take user input, mock behavior atm
                 return index + 2
             }
             4 -> {

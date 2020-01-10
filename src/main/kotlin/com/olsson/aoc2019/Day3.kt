@@ -1,36 +1,37 @@
 package com.olsson.aoc2019
 
-import java.io.File
+import java.lang.IllegalArgumentException
 import java.lang.UnsupportedOperationException
 import kotlin.math.abs
 
 fun main() {
-    val input : List<String> = Utils.getFromResources("day3.txt").readLines().toCollection(arrayListOf())
+    val input : List<String> = Utils.getLines("day3.txt")
     val day3 = Day3()
     val intersection = day3.part1(input)
-    println("Closest intersection is $intersection = ${abs(intersection.first) + abs(intersection.second)}")
-    println(day3.part2(input))
+    println("Closest intersection is $intersection")
+    day3.part2(input)
 }
 
 class Day3 {
 
-    fun part1(wires: List<String>) : Pair<Int, Int> {
+    fun part1(wires: List<String>) : Int {
         val firstWirePoints = findPoints(wires[0].split(","))
         val secondWirePoints = findPoints(wires[1].split(","))
         val closest = findClosestIntersection(firstWirePoints, secondWirePoints)
         return if ( closest != null) {
-            closest.position
+            abs(closest.position.first) + abs(closest.position.second)
         } else {
             println("No intersection found")
-            Pair(0, 0)
+            -1
         }
     }
 
-    fun part2(wires: List<String>) : String {
+    fun part2(wires: List<String>) : Int {
         val firstWirePoints = findPoints(wires[0].split(","))
         val secondWirePoints = findPoints(wires[1].split(","))
         val closest = findClosestIntersectionStepwise(firstWirePoints, secondWirePoints)
-        return "Closest point is steps is ${closest.position} with ${closest.steps} steps"
+        println("Closest point is steps is ${closest.position} with ${closest.steps} steps")
+        return closest.steps
     }
 
     private fun findPoints(wire: List<String>): Set<Point> {
@@ -56,39 +57,28 @@ class Day3 {
         }
     }
 
-    private fun findClosestIntersection(points1: Set<Point>, points2: Set<Point>) : Point? {
-        val points2Positions = points2.map { point -> point.position  }.toCollection(mutableSetOf())
-        return points1
-            .filter { point -> points2Positions.contains(point.position) }
+    private fun findClosestIntersection(wire1: Set<Point>, wire2: Set<Point>) : Point? {
+        val wire2Positions = wire2.map { point -> point.position  }.toCollection(mutableSetOf())
+        return wire1
+            .filter { point -> wire2Positions.contains(point.position) }
             .minBy { point -> abs(point.getX()) + abs(point.getY()) }
     }
 
     private fun findClosestIntersectionStepwise(points1: Set<Point>, points2: Set<Point>) : Point {
-        val intersectionPoints = getIntersectingPoints(points1, points2)
-        var candidate = Point(Int.MAX_VALUE, Pair(0, 0))
-        for(point in intersectionPoints.first) {
-            for(point2 in intersectionPoints.second) {
-                if(point.position == point2.position) {
-                    val combinedSteps = point.steps + point2.steps
-                    if (combinedSteps < candidate.steps) {
-                        candidate = Point(combinedSteps, Pair(point.getX(), point.getY()))
-                    }
-                }
-            }
-        }
-        return candidate
+        val intersectionPoints = sumStepOnIntersectingPoints(points1, points2)
+        return intersectionPoints.minBy { point -> point.steps }
+                ?: throw IllegalArgumentException("No minimum step point for this setup")
     }
 
-    private fun getIntersectingPoints(points1: Set<Point>, points2: Set<Point>) : Pair<List<Point>, List<Point>> {
-        val points1Positions = points1.map { point -> point.position  }.toCollection(mutableSetOf())
-        val points2Positions = points2.map { point -> point.position  }.toCollection(mutableSetOf())
-        val wire1 = points1
-            .filter { point -> points2Positions.contains(point.position) }
+    private fun sumStepOnIntersectingPoints(wire1: Set<Point>, wire2: Set<Point>) : List<Point> {
+        val wire2Positions = wire2.map { point -> point.position  }.toCollection(mutableSetOf())
+        return wire1
+            .filter { point -> wire2Positions.contains(point.position) }
+            .map { point ->
+                val other = wire2.first { otherPoint -> point.position == otherPoint.position }
+                Point(point.steps + other.steps, point.position)
+            }
             .toCollection(mutableListOf())
-        val wire2 = points2
-            .filter { point -> points1Positions.contains(point.position) }
-            .toCollection(mutableListOf())
-        return Pair(wire1, wire2)
     }
 
     private class Point(

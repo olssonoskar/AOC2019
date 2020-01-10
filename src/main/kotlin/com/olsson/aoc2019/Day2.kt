@@ -1,11 +1,8 @@
 package com.olsson.aoc2019
 
-import java.io.File
-
 fun main() {
-    val input : String = Utils.getFromResources("day2.txt").readLines().reduce{ a, b -> "$a,$b" }
-    val inputs = input.split(',').map { it.toInt() }
-    val day2 = Day2(inputs, 19_690_720)
+    val inputs = Utils.getAsIntList("day2.txt")
+    val day2 = Day2(inputs)
     val result = day2.part1()
     println("The result of part1 is $result")
     val result2 = day2.part2()
@@ -15,7 +12,7 @@ fun main() {
 
 class Day2 (
     private val commands: List<Int>,
-    private val searched: Int
+    private val searched: Int = 19_690_720
 ){
     var currentRun = mutableListOf<Int>()
 
@@ -43,9 +40,11 @@ class Day2 (
         return Pair(0, 0)
     }
 
-    fun part1(): Int {
+    fun part1(exampleRun : Boolean = false): Int {
         currentRun = commands.toMutableList()
-        restoreAlarm()
+        if (!exampleRun) {
+            restoreAlarm()
+        }
         execute()
         return currentRun[0]
     }
