@@ -1,7 +1,7 @@
 package com.olsson.aoc2019
 
 fun main() {
-    val inputs = Utils.getAsIntList("day2.txt")
+    val inputs = InputUtils.getInts("day2.txt")
     val day2 = Day2(inputs)
     val result = day2.part1()
     println("The result of part1 is $result")

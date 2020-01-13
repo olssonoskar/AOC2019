@@ -1,13 +1,10 @@
 package com.olsson.aoc2019
 
-import java.io.File
-import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 fun main() {
-    val input : String = Utils.getFromResources("day7.txt").readLines().reduce{ a, b -> "$a,$b" }
-    val inputInt = input.split(',').map { it.toInt() }
-    val day7 = Day7(inputInt)
+    val input = InputUtils.getInts("day7.txt")
+    val day7 = Day7(input)
     println("Max should be ${day7.searchMax()}")
     println("Max should be ${day7.searchMaxWithFeedback()}")
 }
@@ -15,9 +12,6 @@ fun main() {
 class Day7 (
     private val commands: List<Int>
 ){
-    private val HALT_OP = 99
-    private val WRITE_OP = 4
-
     private var currentCommands = mutableListOf<Int>()
     // Used in part 2
     private var amps = listOf<Amplifier>()
@@ -226,4 +220,9 @@ class Day7 (
         val commands: MutableList<Int>,
         var pc: Int
     )
+
+    companion object {
+        private const val HALT_OP = 99
+        private const val WRITE_OP = 4
+    }
 }

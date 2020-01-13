@@ -4,11 +4,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.File
 
 @ExperimentalCoroutinesApi
 fun main() {
-    val input : String = Utils.getFromResources("day11.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = InputUtils.getFromResources("day11.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputLong = input.split(',').map { it.toLong() }
     println(Day11(inputLong).paintShip().size)
     printMap(Day11(inputLong).paintShip(1))

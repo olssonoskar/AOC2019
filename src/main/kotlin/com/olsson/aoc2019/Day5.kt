@@ -1,11 +1,10 @@
 package com.olsson.aoc2019
 
-import java.io.File
 import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 fun main() {
-    val input = Utils.getAsIntList("day5.txt")
+    val input = InputUtils.getInts("day5.txt")
     var day5 = Day5(input)
     day5.execute()
     day5 = Day5(input, 5)

@@ -1,13 +1,12 @@
 package com.olsson.aoc2019
 
-import java.io.File
 import java.lang.UnsupportedOperationException
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
 
 fun main() {
-    val input = Utils.getFromResources("day10.txt").readLines().reduce{ a, b -> "$a|$b"}
+    val input = InputUtils.getFromResources("day10.txt").readLines().reduce{ a, b -> "$a|$b"}
         .split('|')
     val day10 = Day10(input)
     day10.findBestScanPos()

@@ -1,9 +1,7 @@
 package com.olsson.aoc2019
 
-import java.io.File
-
 fun main() {
-    val input : String = Utils.getFromResources("day8.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = InputUtils.getFromResources("day8.txt").readLines().reduce{ a, b -> "$a,$b" }
     val day8 = Day8(25, 6, input)
     println("Part 1 equals ${day8.validate()}")
     day8.decodeImage()

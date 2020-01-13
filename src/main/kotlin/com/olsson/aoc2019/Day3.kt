@@ -5,7 +5,7 @@ import java.lang.UnsupportedOperationException
 import kotlin.math.abs
 
 fun main() {
-    val input : List<String> = Utils.getLines("day3.txt")
+    val input : List<String> = InputUtils.getLines("day3.txt")
     val day3 = Day3()
     val intersection = day3.part1(input)
     println("Closest intersection is $intersection")

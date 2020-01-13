@@ -1,9 +1,7 @@
 package com.olsson.aoc2019
 
-import java.io.File
-
 fun main() {
-    val input = Utils.getAsStringList("day6.txt")
+    val input = InputUtils.getStrings("day6.txt")
     val day6 = Day6(input)
     println(day6.calcOrbits())
     println(day6.calcOrbitalTransfer())

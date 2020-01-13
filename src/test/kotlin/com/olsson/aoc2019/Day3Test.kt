@@ -20,7 +20,7 @@ class Day3Test {
     @Test
     @DisplayName("Day 3 - part 1")
     fun part1() {
-        val input = Utils.getLines("day3.txt")
+        val input = InputUtils.getLines("day3.txt")
         val result = day3.part1(input)
         assertEquals(3247, result)
     }
@@ -37,7 +37,7 @@ class Day3Test {
     @Test
     @DisplayName("Day 3 - part 2")
     fun part2() {
-        val input = Utils.getLines("day3.txt")
+        val input = InputUtils.getLines("day3.txt")
         val result = day3.part2(input)
         assertEquals(48054, result)
     }

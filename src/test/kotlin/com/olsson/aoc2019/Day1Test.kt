@@ -20,7 +20,7 @@ class Day1Test {
     @Test
     @DisplayName("Day 1 - Part 1")
     fun actual1() {
-        val result = day1.fuelRequired(Utils.getAsIntList("day1.txt"))
+        val result = day1.fuelRequired(InputUtils.getInts("day1.txt"))
         assertEquals( 3380880, result)
     }
 
@@ -34,7 +34,7 @@ class Day1Test {
     @Test
     @DisplayName("Day 1 - Part 2")
     fun actual2() {
-        val result = day1.fuelRequiredAll(Utils.getAsIntList("day1.txt"))
+        val result = day1.fuelRequiredAll(InputUtils.getInts("day1.txt"))
         assertEquals( 5068454, result)
     }
 

@@ -17,7 +17,7 @@ class Day2Test {
     @Test
     @DisplayName("Day 2 - part 1")
     fun part1() {
-        val input = Utils.getAsIntList("day2.txt")
+        val input = InputUtils.getInts("day2.txt")
         val result = Day2(input).part1()
         assertEquals(4945026, result)
     }
@@ -25,7 +25,7 @@ class Day2Test {
     @Test
     @DisplayName("Day 2 - part 2")
     fun part2() {
-        val input = Utils.getAsIntList("day2.txt")
+        val input = InputUtils.getInts("day2.txt")
         val result = Day2(input).part2()
         assertEquals(Pair(52, 96), result)
     }

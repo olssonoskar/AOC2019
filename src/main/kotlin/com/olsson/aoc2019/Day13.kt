@@ -5,12 +5,11 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.File
 import kotlin.math.sign
 
 @ExperimentalCoroutinesApi
 fun main() {
-    val input : String = Utils.getFromResources("day13.txt").readLines().reduce{ a, b -> "$a,$b" }
+    val input : String = InputUtils.getFromResources("day13.txt").readLines().reduce{ a, b -> "$a,$b" }
     val inputLong = input.split(',').map { it.toLong() }
     val day13 = Day13()
     println(day13.part1(inputLong))

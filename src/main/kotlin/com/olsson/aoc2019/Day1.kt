@@ -1,7 +1,7 @@
 package com.olsson.aoc2019
 
 fun main() {
-    val input = Utils.getAsIntList("day1.txt")
+    val input = InputUtils.getInts("day1.txt")
     val day1 = Day1()
     val part1 = day1.fuelRequired(input)
     println("Part1 : Total fuel required: $part1")

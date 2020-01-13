@@ -1,36 +1,37 @@
 package com.olsson.aoc2019
 
-import java.io.File
 import java.lang.IndexOutOfBoundsException
 import java.lang.UnsupportedOperationException
 import kotlin.math.pow
 
 fun main() {
-    val input : String = Utils.getFromResources("day9.txt").readLines().reduce{ a, b -> "$a,$b" }
-    val inputLong = input.split(',').map { it.toLong() }
-    val day9 = Day9(inputLong)
+    val input = InputUtils.getLongs("day9.txt")
+    var day9 = Day9(input)
+    day9.execute()
+    day9 = Day9(input, mode = 2)
     day9.execute()
 }
 
 class Day9 (
-    //Must be mutable so we can use more than whats initialized
-    private val commands: List<Long>
+    //Must be mutable so we can use more than whats initialized - map would be better
+    private val commands: List<Long>,
+    private val mode : Long = 1L
 ){
-    val HALT_OP = 99L
-    val FALSE = 0L
+    private var currentRun = mutableListOf<Long>()
+    private var relativeBase = 0
+    private var printBuffer = mutableListOf<String>()
 
-    var currentRun = mutableListOf<Long>()
-    var relativeBase = 0
-
-    fun execute() {
+    fun execute() : String {
+        printBuffer = mutableListOf()
         currentRun = commands.toMutableList()
         var current = 0
         do {
             current = runOperationAt(current)
         } while (currentRun[current] != HALT_OP)
+        return printBuffer.reduce{a, b -> "$a\n$b"}
     }
 
-    fun runOperationAt(index: Int) : Int {
+    private fun runOperationAt(index: Int) : Int {
         val param = currentRun[index]
         when (param.getOpCode()) {
             1 -> {
@@ -46,12 +47,14 @@ class Day9 (
                 return index + 4
             }
             3 -> {
-                val input = readLine()
-                setCommands(index + 1, param.numberAt(2), input!!.toLong())
+                val input = mode
+                setCommands(index + 1, param.numberAt(2), input)
                 return index + 2
             }
             4 -> {
-                println(getFromCommands(index + 1, param.numberAt(2)))
+                val value = getFromCommands(index + 1, param.numberAt(2))
+                println(value)
+                printBuffer.add(value.toString())
                 return index + 2
             }
             5 -> {  //jump-if
@@ -146,5 +149,10 @@ class Day9 (
 
     private fun Long.getOpCode() : Int {
         return (this % 100L).toInt()
+    }
+
+    companion object {
+        private const val HALT_OP = 99L
+        private const val FALSE = 0L
     }
 }

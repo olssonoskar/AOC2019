@@ -30,7 +30,7 @@ class Day6Test {
     @Test
     @DisplayName("Day 6 - part 1")
     fun part1() {
-        val input = Utils.getAsStringList("day6.txt")
+        val input = InputUtils.getStrings("day6.txt")
         val day6 = Day6(input)
         assertEquals(278744, day6.calcOrbits())
     }
@@ -61,7 +61,7 @@ class Day6Test {
     @Test
     @DisplayName("Day 6 - part 2")
     fun part2() {
-        val input = Utils.getAsStringList("day6.txt")
+        val input = InputUtils.getStrings("day6.txt")
         val day6 = Day6(input)
         assertEquals(475, day6.calcOrbitalTransfer())
     }

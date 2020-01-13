@@ -1,10 +1,9 @@
 package com.olsson.aoc2019
 
-import java.io.File
 import kotlin.math.abs
 
 fun main() {
-    val input = Utils.getFromResources("day12.txt")
+    val input = InputUtils.getFromResources("day12.txt")
         .readLines().reduce{ a, b -> "$a,$b" }
         .replace(Regex("[<>xyz=]+"), "")
         .split(",")
