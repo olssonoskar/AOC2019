@@ -2,6 +2,7 @@ package com.olsson.aoc2019
 
 import java.io.File
 import java.lang.IllegalArgumentException
+import kotlin.math.min
 
 internal object InputUtils {
 
@@ -15,7 +16,7 @@ internal object InputUtils {
         return getFromResources(file).readLines().toCollection(arrayListOf())
     }
 
-    fun getString(file : String, separator : String = ",") : String {
+    private fun getString(file : String, separator : String = ",") : String {
         return getFromResources(file).readLines().reduce{a, b -> "$a$separator$b"}
     }
 
@@ -29,6 +30,15 @@ internal object InputUtils {
 
     fun getLongs(file: String) : List<Long> {
         return getStrings(file).map { it.toLong() }
+    }
+
+    fun equallySplitList(input : String, length : Int = 1, isFile : Boolean = true) : List<String> {
+        val content = if (isFile) getString(input) else input
+        val result = mutableListOf<String>()
+        for (i in content.indices) {
+            result.add(content.substring(i, min((i + length), content.length)))
+        }
+        return result
     }
 
 }
